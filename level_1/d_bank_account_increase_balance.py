@@ -16,9 +16,11 @@ class BankAccount:
 
     def increase_balance(self, income: float |int) -> None:
         if (type(income) is float) or (type(income) is int):
+            if income < 0:
+                raise ValueError('income should be non-negative')
             self.balance += income
         else:
-            raise TypeError
+            raise TypeError('incorrect type')
 
 
 if __name__ == '__main__':
@@ -27,5 +29,12 @@ if __name__ == '__main__':
     try:
         vasya_account.increase_balance(150)
         print(vasya_account.balance)
-    except:
-        print('Error')
+    except Exception as e:
+        print(e)
+
+    try:
+        vasya_account.increase_balance(-150)
+        print(vasya_account.balance)
+    except Exception as e:
+        print(e)
+
