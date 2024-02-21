@@ -19,24 +19,45 @@ class Product:
         return f'Product {self.title} with price {self.price}'
 
 
-class PremiumProduct(Product):
+class PrintLoggerMixin:
+    def log(self, message):
+        print(message)
+
+class PremiumProduct(Product, PrintLoggerMixin):
+    def __init__(self, title: str, price: float):
+        self.log('premium product created')
+        super().__init__(title, price)
+
     def increase_price(self):
         self.price *= 1.2
+        self.log('price increased')
 
     def get_info(self):
         base_info = super().get_info()
+        self.log('info requested')
         return f'{base_info} (Premium)'
 
 
-class DiscountedProduct(Product):
+class DiscountedProduct(Product, PrintLoggerMixin):
+    def __init__(self, title: str, price: float):
+        self.log('discounted product created')
+        super().__init__(title, price)
+
     def decrease_price(self):
         self.price /= 1.2
+        self.log('price decreased')
 
     def get_info(self):
         base_info = super().get_info()
+        self.log('info requested')
         return f'{base_info} (Discounted)'
 
 
 if __name__ == '__main__':
-    pass
+    bad_potato = DiscountedProduct('potato', 10)
+    bad_potato.decrease_price()
+    print(bad_potato.get_info())
 
+    great_potato = PremiumProduct('potato', 100)
+    great_potato.increase_price()
+    print(great_potato.get_info())
