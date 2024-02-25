@@ -12,8 +12,7 @@
 
 
 class UserManager:
-    def __init__(self, **kwargs) -> None:
-        users_list = kwargs.get('users_list', [])
+    def __init__(self, users_list: list[str] = []) -> None:
         self.usernames = users_list
 
     def add_user(self, username: str) -> None:

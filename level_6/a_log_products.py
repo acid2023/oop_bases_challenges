@@ -23,7 +23,7 @@ class PrintLoggerMixin:
     def log(self, message):
         print(message)
 
-class PremiumProduct(Product, PrintLoggerMixin):
+class PremiumProduct(PrintLoggerMixin, Product):
     def __init__(self, title: str, price: float):
         self.log('premium product created')
         super().__init__(title, price)
@@ -38,7 +38,7 @@ class PremiumProduct(Product, PrintLoggerMixin):
         return f'{base_info} (Premium)'
 
 
-class DiscountedProduct(Product, PrintLoggerMixin):
+class DiscountedProduct(PrintLoggerMixin, Product):
     def __init__(self, title: str, price: float):
         self.log('discounted product created')
         super().__init__(title, price)

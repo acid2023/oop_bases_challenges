@@ -34,7 +34,7 @@ class BaseHeadersMixin:
         return self.generate_base_headers()
 
 
-class CustomResponse(BaseResponse, BaseHeadersMixin):
+class CustomResponse(BaseHeadersMixin, BaseResponse):
     def generate_headers(self):
         headers = super().generate_headers()
         headers['Content-Length'] = self.get_byte_content_length()
