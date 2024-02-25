@@ -26,8 +26,31 @@ class Product:
 
 
 class FoodProduct(Product):
-    pass  # код писать тут
+    def __init__(self, title, quantity, expiration_date):
+        if type(expiration_date) is datetime:
+            expiration_date = expiration_date.date()
+        elif type(expiration_date) is str:
+            self.expiration_date = datetime.strptime(expiration_date, '%Y-%m-%d').date()
+        else:
+            raise TypeError
+        super().__init__(title, quantity)
+
+    def get_full_info(self):
+        return f'Product {self.title}, {self.quantity} in stock, expriration date - {self.expiration_date}.'
+
+    def is_available(self):
+        if self.expiration_date <= datetime.now().date():
+            return False
+        else:
+            return super().is_available()
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    table = Product('table', 15)
+    print(f'{table.get_full_info()} available - {table.is_available()}')
+
+    apple = FoodProduct('apple', 100, '2024-01-01')
+    print(f'{apple.get_full_info()} available - {apple.is_available()}')
+    
+    orange = FoodProduct('orange', 10, '2025-01-01')
+    print(f'{orange.get_full_info()} available - {orange.is_available()}')

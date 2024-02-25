@@ -10,13 +10,31 @@
 
 
 class BankAccount:
-    def __init__(self, owner_full_name: str, balance: float):
+    def __init__(self, owner_full_name: str, balance: float| int) -> None:
         self.owner_full_name = owner_full_name
         self.balance = balance
 
-    def increase_balance(self, income: float):
-        pass  # код писать тут
+    def increase_balance(self, income: float |int) -> None:
+        if (type(income) is float) or (type(income) is int):
+            if income < 0:
+                raise ValueError('income should be non-negative')
+            self.balance += income
+        else:
+            raise TypeError('incorrect type')
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    vasya_account = BankAccount('Vasya', 100)
+    print(vasya_account.balance)
+    try:
+        vasya_account.increase_balance(150)
+        print(vasya_account.balance)
+    except Exception as e:
+        print(e)
+
+    try:
+        vasya_account.increase_balance(-150)
+        print(vasya_account.balance)
+    except Exception as e:
+        print(e)
+

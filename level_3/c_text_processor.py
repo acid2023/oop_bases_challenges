@@ -20,8 +20,14 @@ class TextProcessor:
         return f'Total text length: {len(self.text)}'
 
 
-# код писать тут
+class AdvancedTextProcessor(TextProcessor):
+    def summarize(self):
+        return f'Total text length: {len(self.text)}, total number of words in the text: {len(self.text.split())}'
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    lena = TextProcessor('Lena is a lazy girl studying Python on weekends')
+    print(lena.to_upper(), lena.summarize())
+
+    julya = AdvancedTextProcessor('Julya is a self-motivated girl studying Python everyday')
+    print(julya.to_upper(), julya.summarize())

@@ -14,6 +14,7 @@
 """
 import csv
 import json
+import pathlib
 
 
 class FileHandler:
@@ -26,12 +27,21 @@ class FileHandler:
 
 
 class JSONHandler(FileHandler):
-    pass  # код писать тут
-
+    def read(self):
+        with open(self.filename, 'r') as file:
+            return json.load(file)
 
 class CSVHandler(FileHandler):
-    pass  # код писать тут
+    def read(self):
+        with open(self.filename, 'r') as file:
+            return list(csv.DictReader(file))
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    path = pathlib.Path().absolute() / 'data'
+    file = FileHandler(f'{path}/text.txt')
+    print(file.read())
+    file_json = JSONHandler(f'{path}/recipes.json')
+    print(file_json.read())
+    csv_file = CSVHandler(f'{path}/user_info.csv')
+    print(csv_file.read())

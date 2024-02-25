@@ -17,8 +17,27 @@ class BankAccount:
         self.balance = balance
 
     def decrease_balance(self, amount: float):
-        pass  # писать код тут
+        if amount < 0:
+            raise ValueError('amount should be non-negative')
+        if self.balance - amount >= self.min_balance:
+            self.balance -= amount
+        else:
+            raise ValueError('overdrafting more than minimum balance')
 
 
 if __name__ == '__main__':
-    pass  # писать код тут
+    vasya_account = BankAccount('Vasya', 100)
+    print(vasya_account.balance)
+    try:
+        vasya_account.decrease_balance(150)
+        print(vasya_account.balance)
+    except Exception as e:
+        print(e)
+
+    try:
+        vasya_account.decrease_balance(150)
+        print(vasya_account.balance)
+    except Exception as e:
+        print(e)
+
+

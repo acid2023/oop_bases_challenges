@@ -11,4 +11,10 @@ SURNAMES_TO_BAN = ['Vaughn', 'Wilhelm', 'Santaros', 'Porter', 'Smith']
 
 
 class User:
-    pass  # код писать тут
+    def __init__(self, name: str, surname: str, age: int) -> None:
+        self.name = name
+        self.surname = surname
+        self.age = age
+
+    def should_be_banned(self) -> bool:
+        return self.surname in SURNAMES_TO_BAN
