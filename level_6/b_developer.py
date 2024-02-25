@@ -34,7 +34,7 @@ class SuperAdminMixin(AdminMixin):
     def decrease_salary(self, employee: Employee, amount: float):
         employee.salary -= amount
 
-class Developer(ItDepartmentEmployee, SuperAdminMixin):
+class Developer(SuperAdminMixin, ItDepartmentEmployee):
     def __init__(self, name: str, surname: str, age: int, salary: float, language: str):
         super().__init__(name, surname, age, salary)
         self.language = language
